@@ -1,61 +1,39 @@
+import java.util.Scanner;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        /* INTEGERS & MATH */
+        /* ERRORS */
+        // NEVER FEAR ERRORS --> They are normal: FEEDBACK!
 
-        int a = 100;
-        int b = 200;
+        /* Compiler Errors (Syntax Errors) */
+        // Errors that are shown before you run the Program!
 
-        /* ADDITION */
-        int sum = a + b;
-        System.out.println("Sum: " + sum);
+        // int x = 0.0; // Error: incompatible type
+        // int x = 0;
 
-        sum = 50;
-        System.out.println("Sum: " + sum);
+        // }} too many closing curly brackets!
 
-        /* SUBTRACTION */
-        int sub = a - b;
-        System.out.println("Subtraction: " + sub);
+        // int z = 0 // Error: expected ;
 
-        /* MULTIPLICATION */
-        int multi = a * b;
-        System.out.println("Multiplication: " + multi);
 
-        /* DIVISION */
-        int division = a / b;
-        System.out.println("Division: " + division);
+        /* Runtime Errors (Exceptions) */
+        // Errors that happen during the program!
 
-        double x = 100;
-        double y = 200;
-        double doubleDivision = x / y;
-        System.out.println("Double Division: " + doubleDivision);
+        // float y = 1 / 0; // Exception: Divide By Zero
 
-        // No Division by 0
-        // division = b / 0;
-        // System.out.println("Division: " + division);
+        // Exception: NullPointerException
+        // String text = null;
+        // System.out.println("Our Text is " + text);
 
-        /* REMAINDER (MODULO) */
-        int remainder = 100 % 2; // = 0 => Even Number | = 1 => Uneven Number!
-        System.out.println("Remaining from 100 / 2: " + remainder);
+        // int length = text.length();
+        // System.out.println("The length of the text is " + length);
 
-        remainder = 100 % 3;
-        System.out.println("Remaining from 100 / 3: " + remainder);
-
-        remainder = 100 % 4;
-        System.out.println("Remaining from 100 / 4: " + remainder);
-
-        /* MATH METHODS */
-        System.out.println("Rounding " + Math.round(6.4));       // Output: 6
-        System.out.println("Rounding Down " + Math.floor(500.2f));  // Output: 6
-        System.out.println("Rounding Up " + Math.ceil(6.4));    // Output: 7
-        System.out.println("Exponent " + Math.pow(2, 3));       // Output: 2^3 = 8
-
-        // More "Math Methods"
-        // Math.
-
-        // "RANDOM" Numbers
-        System.out.println("Random Number between 0 - 10: " + Math.random() * 10);
-        System.out.println("Random Number between 0 - 10: " + Math.round(Math.random() * 10));
+        // FAIL LOUDLY --> THIS MEANS there is something to FIX!
+        // Scanner scanner = new Scanner(System.in);
+        // System.out.println("Enter anything but a number, that's gonna throw an error!");
+        // int number = scanner.nextInt();
+        // System.out.println("You just typed " + number);
     }
 }
