@@ -1,39 +1,37 @@
-import java.util.Scanner;
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        /* ERRORS */
-        // NEVER FEAR ERRORS --> They are normal: FEEDBACK!
+        /* ASSIGNMENT OPERATORS */
 
-        /* Compiler Errors (Syntax Errors) */
-        // Errors that are shown before you run the Program!
+        // Assignment =
+        int mana = 100;
+        System.out.println("Mana: " + mana);
+        // int x = 1000;
+        // x = mana;
 
-        // int x = 0.0; // Error: incompatible type
-        // int x = 0;
+        // ADDITION +=
+        mana += 20; // mana = mana + 20;
+        System.out.println("Mana: " + mana);
+        mana++; // mana = mana + 1 // INCREMENT
+        System.out.println("Mana: " + mana); // 121
 
-        // }} too many closing curly brackets!
+        // SUBTRACTION -=
+        mana--; // mana = mana - 1 // DECREMENT
+        System.out.println("Mana: " + mana);
+        mana -= 60; // mana = mana - 60;
+        System.out.println("Mana: " + mana);
 
-        // int z = 0 // Error: expected ;
+        // MULTIPLY *=
+        mana *= 2;
+        System.out.println("Mana: " + mana);
 
+        // DIVIDE /=
+        mana /= 4;
+        System.out.println("Mana: " + mana);
 
-        /* Runtime Errors (Exceptions) */
-        // Errors that happen during the program!
-
-        // float y = 1 / 0; // Exception: Divide By Zero
-
-        // Exception: NullPointerException
-        // String text = null;
-        // System.out.println("Our Text is " + text);
-
-        // int length = text.length();
-        // System.out.println("The length of the text is " + length);
-
-        // FAIL LOUDLY --> THIS MEANS there is something to FIX!
-        // Scanner scanner = new Scanner(System.in);
-        // System.out.println("Enter anything but a number, that's gonna throw an error!");
-        // int number = scanner.nextInt();
-        // System.out.println("You just typed " + number);
+        // MODULO (REMAINDER) %=
+        mana %= 2;
+        System.out.println("Mana: " + mana);
     }
 }
