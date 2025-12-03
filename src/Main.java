@@ -1,89 +1,147 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        /* METHODS */
-        // Going Beyond the main method!
-        // When you need to redo the same thing in different places!
-        // We predefine a certain "behaviour"/task and can repeat it
+        /* EXERCISE 2a: Easy Calculator (Now with Methods)
+         *
+         * Use the same Calculator, we've made in Exercise 1a and remake it with methods!
+         * In addition, make it so that the calculator asks if you'd like to continue, you can then say "y" if you do!
+         * Think how this "infinite" loop could be made! (Hint: Lesson Loops)
+         *
+         * Estimated Time: 30-45 minutes
+         *
+         */
 
-        // We can call a method
-        test();
-        test();
-        test();
+        /* SOLUTION EXERCISE 2a */
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("What is the first number?");
+            int firstNumber = scanner.nextInt();
+            System.out.println("What is the second number?");
+            int secondNumber = scanner.nextInt();
+            System.out.println("What is the operation? (+, plus | -, minus | *, multiply, | /, divide)");
+            String operation = scanner.next();
+            evaluateOperation(operation, firstNumber, secondNumber);
+            if (wannaStop(scanner)) {
+                break;
+            }
+        }
 
-        // method with parameters
-        outputSum(10, 20);
-        System.out.println("Calling the method: " + outputSum(67, 69));
-        int result = 1000 + outputSum(10, 10);
+        /* EXERCISE 2b: Basic Resource Miner Game (Now with methods)
+         * We will refactor (rewrite) the Classic Resource Miner Game with Methods. This will CLEAN IT UP significantly!
+         *
+         * With this, change it to so the User can input how many blocks they want to harvest before the game ends!
+         *
+         * Estimated Time ~60+ minutes
+         *
+         */
 
-        bakeCake();
-        bakeCake();
-        bakeCake();
-        bakeCake();
+        /* SOLUTION EXERCISE 2b */
+        System.out.println("Welcome to ResourceMiner!");
+
+        // First we define variables
+        int min= 1;
+        int max = 3;
+        int randomBlock;
+        int correctMineScore = 0;
+        scanner = new Scanner(System.in);
+        String toolChoice;
+        int toolChoiceId = 0;
+        int rounds = 0;
+
+        System.out.println("How many block do you want to mine? 1-10");
+        rounds = scanner.nextInt();
+
+        for(int i = 0; i < rounds; i++) {
+            randomBlock = getRandomBlock(min, max);
+            toolChoice = chooseTool(scanner);
+            toolChoiceId = getIdByToolChoice(toolChoice);
+
+            if(areToolAndBlockMatching(randomBlock, toolChoiceId)) {
+                System.out.println("The Block was mined successfully!");
+                correctMineScore++;
+            } else {
+                System.out.println("Your tool broke, but luckily you have extra!");
+            }
+
+            System.out.println("You encounter a new Block!");
+        }
+
+        System.out.println("You have mined all Blocks! You correctly mined " + correctMineScore + " out of " + rounds + ".");
+
     }
 
-    // For now all our methods are: public static void
-    public static void test() {
-        System.out.println("Test");
+
+    /* RESOURCE MINER METHODS */
+    public static int getRandomBlock(int min, int max) {
+        int randomBlock;
+        randomBlock = (int) (Math.random() * (max - min + 1)) + min;
+        switch (randomBlock) {
+            case 1: System.out.println("You find a Stone Block"); break;
+            case 2: System.out.println("You find a Clay Block"); break;
+            case 3: System.out.println("You find a Cobweb Block"); break;
+        }
+        return randomBlock;
     }
 
-    // A method with parameters
-    // Method Signature: [public] [static] [return_type] name(parameter_type parameter_name)
-    public static int outputSum(int x, int y) {
-        System.out.println("The sum of " + x + " + " + y + " = " + (x+y));
-        return x + y;
+    public static String chooseTool(Scanner scanner) {
+        String toolChoice;
+        System.out.println("What tool do you want to use to mine the Block: Pickaxe, Shovel or Sword?");
+        toolChoice = scanner.next().toLowerCase();
+        return toolChoice;
     }
 
-    // To Bake a Cake we need a couple steps!
-    public static void bakeCake() {
-        // Preheat the oven to 250°C
-        // Pour Flour
-        // Add Salt
-        // Pour Water
-        // Add Baking Powder
-        // Knead Mixture
-        // Put into the oven for 20 minutes
-        // LOTS OF OTHER STEPS...
-        // We could do it individually, but this becomes hard to read... How about all of those are methods?
-
-        // System.out.println("Preheat the oven to 250°C");
-        // System.out.println("Pour Flour");
-        // System.out.println("Add Salt");
-        // System.out.println("Pour Water");
-        // System.out.println("Add Baking Powder");
-        // We are REPEATING --> Maybe we can make some methods?!
-
-        // Now with methods
-        preheatOven(250);
-        pour("Flour");
-        add("Salt");
-        pour("Water");
-        add("Baking Powder");
-        kneadMixture();
-        putInOvenFor(20);
-        removeFromOven();
+    public static boolean areToolAndBlockMatching(int randomBlock, int toolChoiceId) {
+        return randomBlock == toolChoiceId;
     }
 
-    public static void preheatOven(int degrees) {
-        System.out.println("Preheat the Oven to " + degrees + "°C.");
+    public static int getIdByToolChoice(String toolChoice) {
+        return switch (toolChoice) {
+            case "pickaxe": yield 1;
+            case "shovel": yield 2;
+            case "sword": yield 3;
+            default: System.out.println("ERROR: Could not find " + toolChoice + ". Program now ending!"); yield -1;
+        };
     }
 
-    public static void pour(String ingredient) {
-        System.out.println("Pour " + ingredient);
+
+    /* CALCULATOR METHODS */
+    public static boolean wannaStop(Scanner scanner) {
+        System.out.println("\nDo you want to calculate something else? y/n");
+        return !scanner.next().equals("y");
     }
 
-    public static void add(String ingredient) {
-        System.out.println("Add " + ingredient);
+    public static int sum(int a, int b) {
+        return a + b;
     }
 
-    public static void kneadMixture() {
-        System.out.println("Knead Mixture");
+    public static int subtract(int a, int b) {
+        return a - b;
     }
 
-    public static void putInOvenFor(int minutes) {
-        System.out.println("Put Mixture into Oven for " + minutes + " minutes.");
+    public static int multiply(int a, int b) {
+        return a * b;
     }
 
-    public static void removeFromOven() {
-        System.out.println("The Mixture has been removed from the oven!");
+    public static int divide(int a, int b) {
+        if(b == 0) {
+            System.out.println("Dividing by 0 does not work!");
+            return 0;
+        }
+
+        return a / b;
     }
+
+    public static void evaluateOperation(String operation, int a, int b) {
+        int result;
+        switch (operation) {
+            case "+", "plus": result = sum(a, b); break;
+            case "-", "minus": result = subtract(a, b); break;
+            case "*", "multiply": result = multiply(a, b); break;
+            case "/", "divide": result = divide(a, b); break;
+            default: System.out.println("Not a valid operation"); result = 0;
+        };
+        System.out.println("Result is " + a + " " + operation + " " + b + " = " + result);
+    }
+
 }
