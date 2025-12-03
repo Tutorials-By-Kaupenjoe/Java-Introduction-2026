@@ -1,50 +1,89 @@
 public class Main {
     public static void main(String[] args) {
-        /* ARRAYS */
-        // When you need multiple elements that are loopable
+        /* METHODS */
+        // Going Beyond the main method!
+        // When you need to redo the same thing in different places!
+        // We predefine a certain "behaviour"/task and can repeat it
 
-        String question1 = "What does WWW stand for?";
-        String question2 = "What is the World's largest Ocean?";
-        String question3 = "Which Year did East and West Germany Unify?";
+        // We can call a method
+        test();
+        test();
+        test();
 
-        String answer1 = "World Wide Web";
-        String answer2 = "Pacific Ocean";
-        String answer3 = "1990";
+        // method with parameters
+        outputSum(10, 20);
+        System.out.println("Calling the method: " + outputSum(67, 69));
+        int result = 1000 + outputSum(10, 10);
 
-        // Add a fourth one...
-        // Add another 15...
-        // NOW LOOP THROUGH THEM
+        bakeCake();
+        bakeCake();
+        bakeCake();
+        bakeCake();
+    }
 
-        for(int i = 1; i < 4; i++) {
-            // System.out.println(questioni); // THIS DOES NOT WORK
-        }
+    // For now all our methods are: public static void
+    public static void test() {
+        System.out.println("Test");
+    }
 
-        /* ARRAYS */
-        // Think of a "list" of Elements
-        // Programmers start to count at 0
-        String[] questions = new String[4];
-        questions[0] = "What does WWW stand for?";
-        questions[1] = "What is the World's largest Ocean?";
-        questions[2] = "Which Year did East and West Germany Unify?";
-        questions[3] = "What is the tallest mountain on Earth?";
+    // A method with parameters
+    // Method Signature: [public] [static] [return_type] name(parameter_type parameter_name)
+    public static int outputSum(int x, int y) {
+        System.out.println("The sum of " + x + " + " + y + " = " + (x+y));
+        return x + y;
+    }
 
-        String[] answers = new String[4];
-        answers[0] = "World Wide Web";
-        answers[1] = "Pacific Ocean";
-        answers[2] = "1990";
-        answers[3] = "Mt. Everest";
+    // To Bake a Cake we need a couple steps!
+    public static void bakeCake() {
+        // Preheat the oven to 250°C
+        // Pour Flour
+        // Add Salt
+        // Pour Water
+        // Add Baking Powder
+        // Knead Mixture
+        // Put into the oven for 20 minutes
+        // LOTS OF OTHER STEPS...
+        // We could do it individually, but this becomes hard to read... How about all of those are methods?
 
-        for(int i = 0; i < questions.length; i++) {
-            System.out.println("Q: " + questions[i] + " | A: " + answers[i]);
-        }
+        // System.out.println("Preheat the oven to 250°C");
+        // System.out.println("Pour Flour");
+        // System.out.println("Add Salt");
+        // System.out.println("Pour Water");
+        // System.out.println("Add Baking Powder");
+        // We are REPEATING --> Maybe we can make some methods?!
 
-        int[] numbers = new int[3];
-        numbers[0] = 4;
-        numbers[1] = 8;
-        numbers[2] = 15;
+        // Now with methods
+        preheatOven(250);
+        pour("Flour");
+        add("Salt");
+        pour("Water");
+        add("Baking Powder");
+        kneadMixture();
+        putInOvenFor(20);
+        removeFromOven();
+    }
 
-        for(int i = 0; i < numbers.length; i++) {
-            System.out.println(numbers[i]);
-        }
+    public static void preheatOven(int degrees) {
+        System.out.println("Preheat the Oven to " + degrees + "°C.");
+    }
+
+    public static void pour(String ingredient) {
+        System.out.println("Pour " + ingredient);
+    }
+
+    public static void add(String ingredient) {
+        System.out.println("Add " + ingredient);
+    }
+
+    public static void kneadMixture() {
+        System.out.println("Knead Mixture");
+    }
+
+    public static void putInOvenFor(int minutes) {
+        System.out.println("Put Mixture into Oven for " + minutes + " minutes.");
+    }
+
+    public static void removeFromOven() {
+        System.out.println("The Mixture has been removed from the oven!");
     }
 }
