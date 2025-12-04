@@ -1,147 +1,89 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        /* EXERCISE 2a: Easy Calculator (Now with Methods)
-         *
-         * Use the same Calculator, we've made in Exercise 1a and remake it with methods!
-         * In addition, make it so that the calculator asks if you'd like to continue, you can then say "y" if you do!
-         * Think how this "infinite" loop could be made! (Hint: Lesson Loops)
-         *
-         * Estimated Time: 30-45 minutes
-         *
-         */
+        /* COLLECTIONS */
+        // For when an Array is just not enough!
 
-        /* SOLUTION EXERCISE 2a */
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("What is the first number?");
-            int firstNumber = scanner.nextInt();
-            System.out.println("What is the second number?");
-            int secondNumber = scanner.nextInt();
-            System.out.println("What is the operation? (+, plus | -, minus | *, multiply, | /, divide)");
-            String operation = scanner.next();
-            evaluateOperation(operation, firstNumber, secondNumber);
-            if (wannaStop(scanner)) {
-                break;
-            }
+        // Reminder Arrays... But what if we want to EXPAND?
+        String[] questions = new String[4];
+        questions[0] = "What does WWW stand for?";
+        questions[1] = "What is the World's largest Ocean?";
+        questions[2] = "Which Year did East and West Germany Unify?";
+        questions[3] = "What is the tallest mountain on Earth?";
+
+        String[] answers = new String[4];
+        answers[0] = "World Wide Web";
+        answers[1] = "Pacific Ocean";
+        answers[2] = "1990";
+        answers[3] = "Mt. Everest";
+
+
+        /* LIST */
+        // The MUCH BETTER Array
+        List<String> moreQuestions = new ArrayList<>(); // Diamond Operator <> for "Generic Types"
+        moreQuestions.add("What website hosts the most videos in the world?");
+        moreQuestions.add("What is the Capital of Germany?");
+        System.out.println(moreQuestions.get(0));
+
+        // List<Integer> numbers = new ArrayList<>();
+        // List<Boolean> truthValues;
+
+        // Another type of For Loop (ForEach Loop)
+        // For each String question inside of moreQuestions
+        for(String question : moreQuestions) {
+            System.out.println(question);
         }
 
-        /* EXERCISE 2b: Basic Resource Miner Game (Now with methods)
-         * We will refactor (rewrite) the Classic Resource Miner Game with Methods. This will CLEAN IT UP significantly!
-         *
-         * With this, change it to so the User can input how many blocks they want to harvest before the game ends!
-         *
-         * Estimated Time ~60+ minutes
-         *
-         */
+        /* SET */
+        // Where each element only appears once!
+        Set<String> countriesToVisit = new HashSet<>();
+        countriesToVisit.add("France");
+        countriesToVisit.add("Germany");
+        countriesToVisit.add("Spain");
+        countriesToVisit.add("France");
 
-        /* SOLUTION EXERCISE 2b */
-        System.out.println("Welcome to ResourceMiner!");
+        System.out.println(countriesToVisit);
 
-        // First we define variables
-        int min= 1;
-        int max = 3;
-        int randomBlock;
-        int correctMineScore = 0;
-        scanner = new Scanner(System.in);
-        String toolChoice;
-        int toolChoiceId = 0;
-        int rounds = 0;
 
-        System.out.println("How many block do you want to mine? 1-10");
-        rounds = scanner.nextInt();
+        /* MAP */
+        // To Map one Thing to Another (Key-Value Pair)
+        Map<String, Integer> countryToPopulationMap = new HashMap<>();
+        countryToPopulationMap.put("USA", 331000000);
+        countryToPopulationMap.put("United Kingdom", 67330000);
+        countryToPopulationMap.put("Austria", 8950000);
 
-        for(int i = 0; i < rounds; i++) {
-            randomBlock = getRandomBlock(min, max);
-            toolChoice = chooseTool(scanner);
-            toolChoiceId = getIdByToolChoice(toolChoice);
+        System.out.println(countryToPopulationMap.get("USA"));
+        System.out.println(countryToPopulationMap.get("Germany"));
 
-            if(areToolAndBlockMatching(randomBlock, toolChoiceId)) {
-                System.out.println("The Block was mined successfully!");
-                correctMineScore++;
-            } else {
-                System.out.println("Your tool broke, but luckily you have extra!");
-            }
+        System.out.println(countryToPopulationMap);
 
-            System.out.println("You encounter a new Block!");
-        }
 
-        System.out.println("You have mined all Blocks! You correctly mined " + correctMineScore + " out of " + rounds + ".");
+        /* STACK & QUEUE */
+        // Stacks => LIFO (Last In, First Out)
+        // Queue => FIFO (First In, First Out)
+        Stack<String> cards = new Stack<>();
+        cards.add("King Of Spades");
+        cards.add("Queen of Diamonds");
+        cards.add("Three of Clubs");
+
+        // Pop will get (AND REMOVE) the "top" element of the stack (Taking the card off the top of the deck)
+        System.out.println(cards.pop());
+        // Peek will LOOK at the top element "get it", but not remove (Look at the card, put it back again)
+        System.out.println(cards.peek());
+
+        Queue<String> registerQueue = new ArrayDeque<>();
+
+        registerQueue.add("Kaupenjoe");
+        registerQueue.add("Moon");
+        registerQueue.add("Arch");
+        registerQueue.add("Luc");
+        registerQueue.add("Nano");
+
+        // Poll will get (AND REMOVE) the "front" element (in the case teh first person at the register!)
+        System.out.println(registerQueue.poll());
+        // Peek once again will get, but not remove the person at the front!
+        System.out.println(registerQueue.peek());
 
     }
-
-
-    /* RESOURCE MINER METHODS */
-    public static int getRandomBlock(int min, int max) {
-        int randomBlock;
-        randomBlock = (int) (Math.random() * (max - min + 1)) + min;
-        switch (randomBlock) {
-            case 1: System.out.println("You find a Stone Block"); break;
-            case 2: System.out.println("You find a Clay Block"); break;
-            case 3: System.out.println("You find a Cobweb Block"); break;
-        }
-        return randomBlock;
-    }
-
-    public static String chooseTool(Scanner scanner) {
-        String toolChoice;
-        System.out.println("What tool do you want to use to mine the Block: Pickaxe, Shovel or Sword?");
-        toolChoice = scanner.next().toLowerCase();
-        return toolChoice;
-    }
-
-    public static boolean areToolAndBlockMatching(int randomBlock, int toolChoiceId) {
-        return randomBlock == toolChoiceId;
-    }
-
-    public static int getIdByToolChoice(String toolChoice) {
-        return switch (toolChoice) {
-            case "pickaxe": yield 1;
-            case "shovel": yield 2;
-            case "sword": yield 3;
-            default: System.out.println("ERROR: Could not find " + toolChoice + ". Program now ending!"); yield -1;
-        };
-    }
-
-
-    /* CALCULATOR METHODS */
-    public static boolean wannaStop(Scanner scanner) {
-        System.out.println("\nDo you want to calculate something else? y/n");
-        return !scanner.next().equals("y");
-    }
-
-    public static int sum(int a, int b) {
-        return a + b;
-    }
-
-    public static int subtract(int a, int b) {
-        return a - b;
-    }
-
-    public static int multiply(int a, int b) {
-        return a * b;
-    }
-
-    public static int divide(int a, int b) {
-        if(b == 0) {
-            System.out.println("Dividing by 0 does not work!");
-            return 0;
-        }
-
-        return a / b;
-    }
-
-    public static void evaluateOperation(String operation, int a, int b) {
-        int result;
-        switch (operation) {
-            case "+", "plus": result = sum(a, b); break;
-            case "-", "minus": result = subtract(a, b); break;
-            case "*", "multiply": result = multiply(a, b); break;
-            case "/", "divide": result = divide(a, b); break;
-            default: System.out.println("Not a valid operation"); result = 0;
-        };
-        System.out.println("Result is " + a + " " + operation + " " + b + " = " + result);
-    }
-
 }
