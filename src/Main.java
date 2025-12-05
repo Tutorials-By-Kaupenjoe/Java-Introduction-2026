@@ -1,31 +1,33 @@
+import net.kaupenjoe.Animal;
+import net.kaupenjoe.Cat;
 import net.kaupenjoe.Dog;
 
 public class Main {
     public static void main(String[] args) {
-        /* ACCESS MODIFIERS */
-
-        System.out.println("How many dogs are there: " + Dog.numberOfDogs);
+        /* INHERITANCE & POLYMORPHISM */
 
         Dog bengie = new Dog("bengie.png", "Bengie", 11);
         Dog jeremy = new Dog("jeremy.jpg", "Jeremy", 7);
 
-        System.out.println("How many dogs are there: " + Dog.numberOfDogs);
+        Cat whiskers = new Cat("whiskers.png", "Whiskers", 4);
 
-        System.out.println("Bengie age: " + bengie.getAge());
-        System.out.println("Jeremy age: " + jeremy.getAge());
+        // IF SOMETHING REPEATS... WE CAN DO SOMETHING
 
-        jeremy.bark();
+        bengie.displayInfo();
         bengie.birthday();
+        bengie.displayInfo();
+        bengie.makeSound();
 
-        System.out.println("Bengie age: " + bengie.getAge());
-        System.out.println("Jeremy age: " + jeremy.getAge());
+        whiskers.displayInfo();
+        whiskers.birthday();
 
-        // bengie.age = 100; // modify this field directly! (not usually what we want)
+        whiskers.makeSound();
 
-        System.out.println("Bengie age: " + bengie.getAge());
+        Animal myCuteAnimal;
+        myCuteAnimal = new Dog("charlie.png", "Charlie", 15);
 
-        Dog charlie = new Dog("charlie.png", "Charlie", 13);
+        myCuteAnimal.makeSound();
+        ((Dog) myCuteAnimal).bellyRub();
 
-        System.out.println("How many dogs are there: " + Dog.numberOfDogs);
     }
 }
