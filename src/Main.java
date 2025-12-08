@@ -1,34 +1,49 @@
-import net.kaupenjoe.bank.Bank;
-import net.kaupenjoe.bank.Person;
+import net.kaupenjoe.*;
 
 public class Main {
     public static void main(String[] args) {
-        /*
-         * EXERCISE 4:
-         * Bank Management System:
-         * Create a Bank Management System which has the following components:
-         * Person (which saves first, middle and last name, age and maybe a "social security number")
-         * Bank (which saves a List of customers and their Checking Accounts, maximum overdraw amount)
-         * Checking Account (should have a current value, methods for taking and depositing money)
-         * Opening a Checking Account should only work via a Bank and must require a certain amount of initial deposit.
-         *
-         *
-         */
+        /* ANONYMOUS CLASSES */
 
-        /* SOLUTION 4 */
+        Dog bengie = new Dog("bengie.png", "Bengie", 11);
+        Dog jeremy = new Dog("jeremy.jpg", "Jeremy", 7);
+        Cat whiskers = new Cat("whiskers.png", "Whiskers", 4);
+        Animal john = new Cat("john.png", "John", 31); // new Animal doesn't work with Abstract Classes!
 
-        Person nano = new Person("Nano", "Attack", 8);
-        Person daniel = new Person("Daniel", "Smith", 24);
-        Person marie = new Person("Marie", "Susan", "Jones", 28);
+        Bird birdy = new Bird("birdy.jpg", "Birdy", 2);
+        Bird yoshi = new Bird("yoshi.jpg", "Yoshi", 3) {
+            @Override
+            public void move() {
+                System.out.println(this.getName() + " soars through the skies.");
+            }
+        };
 
-        Bank kaupenBank = new Bank("KaupenBank");
-        kaupenBank.openBankAccount(nano, 200); // Not old Enough
+        birdy.move();
+        yoshi.move();
 
-        kaupenBank.openBankAccount(marie, 2000);
-        kaupenBank.openBankAccount(daniel, 10); // Deposit is not enough
+        Bear browny = new Bear("browny.png", "Browny", 12);
 
-        System.out.println(kaupenBank.getAccountByPerson(marie).getBalance()); // 2000
-        kaupenBank.withdrawAmount(3000, marie); // Cannot withdraw over the limit!
+        Pettable nano = new Cat("nano.bmp", "Nano", 0);
+        Pettable luc = new Pettable() {
+            @Override
+            public void pet() {
+                System.out.println("Luc looks weird at you, because he's a human...");
+            }
+        };
+
+        Animal july = new Animal("july.png", "July", 100) {
+            @Override
+            public void move() {
+                System.out.println(this.getName() + " crawls slowly.");
+            }
+        };
+
+        july.displayInfo();
+        july.move();
+
+        PettingZoo myZoo = new PettingZoo(bengie, jeremy, whiskers, nano, (Cat)john, luc);
+        myZoo.petRandomAnimal();
+        myZoo.petRandomAnimal();
+        myZoo.petRandomAnimal();
 
     }
 }
