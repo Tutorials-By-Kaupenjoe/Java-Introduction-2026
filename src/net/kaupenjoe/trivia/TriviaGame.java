@@ -54,7 +54,7 @@ public class TriviaGame {
             System.out.println("Correct Answer!");
             score++;
         } else {
-            System.out.println("False, the right answer was " + question.getAnswer());
+            System.out.println("False, the right answer was " + question.answer());
         }
     }
 
