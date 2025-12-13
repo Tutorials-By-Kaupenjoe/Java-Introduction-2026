@@ -1,21 +1,29 @@
-import net.kaupenjoe.Difficulty;
-import net.kaupenjoe.ToolMaterial;
+import net.kaupenjoe.bank.Bank;
+import net.kaupenjoe.bank.Person;
 
 public class Main {
     public static void main(String[] args) {
-        /* Enums & Advanced Enums */
+        /* Exceptions & Try and Catch */
+        // Throw an exception if something happens that's "unexpected".
+        // Rule of Thumb: FAIL LOUDLY!
 
-        Difficulty gameDifficulty = Difficulty.MEDIUM;
-        System.out.println("Difficulty is " + gameDifficulty);
+        Person nano = new Person("Nano", "Attack", 8);
+        Person daniel = new Person("Daniel", "Smith", 24);
+        Person marie = new Person("Marie", "Susan", "Jones", 28);
 
+        Bank kaupenBank = new Bank("KaupenBank");
+        try {
+            kaupenBank.openBankAccount(nano, 200); // Not old Enough
+        } catch(Exception e) {
+            System.out.println("Open Bank Error: " + e.getMessage());
+            e.printStackTrace(System.out);
+        }
 
-        ToolMaterial toolMaterial1 = ToolMaterial.STONE;
-        ToolMaterial toolMaterial2 = ToolMaterial.DIAMOND;
+        kaupenBank.openBankAccount(marie, 2000);
+        kaupenBank.openBankAccount(daniel, 10); // Deposit is not enough
 
-        toolMaterial1.useTool();
-        toolMaterial1.mine();
+        System.out.println(kaupenBank.getAccountByPerson(marie).getBalance()); // 2000
+        kaupenBank.withdrawAmount(3000, marie); // Cannot withdraw over the limit!
 
-        toolMaterial2.useTool();
-        toolMaterial2.mine();
     }
 }
