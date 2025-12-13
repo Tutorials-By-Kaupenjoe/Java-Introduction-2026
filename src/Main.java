@@ -1,29 +1,36 @@
-import net.kaupenjoe.bank.Bank;
-import net.kaupenjoe.bank.Person;
+import net.kaupenjoe.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        /* Exceptions & Try and Catch */
-        // Throw an exception if something happens that's "unexpected".
-        // Rule of Thumb: FAIL LOUDLY!
+        /* Generics */
+        // "Variables" for Data Types
 
-        Person nano = new Person("Nano", "Attack", 8);
-        Person daniel = new Person("Daniel", "Smith", 24);
-        Person marie = new Person("Marie", "Susan", "Jones", 28);
+        List<String> questions;
+        String name;
+        int age = 10;
 
-        Bank kaupenBank = new Bank("KaupenBank");
-        try {
-            kaupenBank.openBankAccount(nano, 200); // Not old Enough
-        } catch(Exception e) {
-            System.out.println("Open Bank Error: " + e.getMessage());
-            e.printStackTrace(System.out);
-        }
+        ItemStorage<Sword> swordRack = new ItemStorage<>();
+        swordRack.addItem(new Sword("Iron Sword"));
+        swordRack.addItem(new Sword("Diamond Sword"));
+        swordRack.displayItems();
 
-        kaupenBank.openBankAccount(marie, 2000);
-        kaupenBank.openBankAccount(daniel, 10); // Deposit is not enough
+        ItemStorage<Potion> potionStorage = new ItemStorage<>();
+        potionStorage.addItem(new Potion("Health Potion"));
+        potionStorage.addItem(new Potion("Strength Potion"));
+        potionStorage.displayItems();
 
-        System.out.println(kaupenBank.getAccountByPerson(marie).getBalance()); // 2000
-        kaupenBank.withdrawAmount(3000, marie); // Cannot withdraw over the limit!
+        BlockStorage<Block> blockStorage = new BlockStorage<>();
+        blockStorage.addBlock(new WoodBlock());
+        blockStorage.addBlock(new WoodBlock());
+        blockStorage.addBlock(new StoneBlock());
+        blockStorage.addBlock(new WoodBlock());
+        blockStorage.addBlock(new StoneBlock());
+        blockStorage.displayBlocks();
+
 
     }
 }
