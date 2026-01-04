@@ -1,28 +1,49 @@
+import net.kaupenjoe.components.*;
+import net.kaupenjoe.components.requests.BirthdayRequest;
+import net.kaupenjoe.components.requests.DamageRequest;
+import net.kaupenjoe.components.requests.PetRequest;
+import net.kaupenjoe.systems.*;
+
 public class Main {
     public static void main(String[] args) {
-        /* EXERCISE 5a: Final Resource Miner
-         * Create the Resource Miner with all the lessons we've had previously!
-         * Consider adding events (and how to add those) which you can use to "dynamically" add behaviour.
-         * Make the system in such a way that adding a block is SIMPLE. Think about what that might require!
-         * This means you shouldn't have to manually adjust a number somewhere ("Magic Numbers")
-         * Add a Tool Tier System too! Certain Blocks might require different tiers!
-         * Here, maybe give the player multiple choice on which Block to mine instead of just one!
-         * Anything else, feel free to play around and experiment!
-         *
-         */
+        /* ENTITY COMPONENT SYSTEM (ECS) */
+        // Unity --> GameObjects and MonoBehaviour
+        // Examples: Binding of Issac
+        // Expedition 33: Pictos & Lumina
+        World world = new World();
 
-        /* EXERCISE 5b: An RPG Game
-         * Create a very basic Text Based RPG!
-         * Have the player choose a Class: Archer, Mage, Warrior
-         * Consider how the statistics might be different and how to create those depending on the Class (Builder Pattern)
-         * Have at least 5 different types of Enemies to fight. The fighting can be simple "round based" combat
-         * where you choose what action to take.
-         *
-         * Think about a "State Machine" which tracks what is happening in the game.
-         *
-         * Think about maybe creating a very simple Inventory System where Items can have certain uses and effects.
-         *
-         * Experiment and just have fun!
-         */
+        world.addSystem(new SoundSystem());
+        world.addSystem(new AgeSystem());
+        world.addSystem(new PettingZooSystem());
+        world.addSystem(new CombatSystem());
+
+
+        int bengieId = world.createEntity(new NameComponent("Bengie"), new AgeComponent(11),
+                new NoiseComponent("Barked"), new PettableComponent("Had their belly rubbed!"),
+                new HealthComponent(10));
+        int whiskersId = world.createEntity(new NameComponent("Whiskers"), new AgeComponent(7),
+                new NoiseComponent("Hissed"), new PettableComponent("Scratched You"));
+        int charlieId = world.createEntity(new NameComponent("Charlie"), new AgeComponent(3),
+                new NoiseComponent("Barked"), new PettableComponent("Had their belly rubbed!"));
+
+        int vedalId = world.createEntity(new NameComponent("Vedal"), new AgeComponent(115),
+                new NoiseComponent("Moaned"), new PettableComponent("Retracts into Shell"),
+                new HasShellComponent(), new HealthComponent(100));
+
+        world.edit(vedalId).add(new DamageRequest(2)); // bengie.birthday();
+
+        world.process();
+
+        world.edit(vedalId).add(new PetRequest());
+        // world.edit(bengieId).add(new DamageRequest(2)); // bengie.birthday();
+        // world.edit(charlieId).add(new BirthdayRequest()); // charlie.birthday();
+
+        world.process();
+
+        world.edit(vedalId).add(new DamageRequest(2)); // bengie.birthday();
+        // world.edit(whiskersId).add(new PetRequest());
+        // world.edit(whiskersId).add(new BirthdayRequest()); // whiskers.birthday();
+
+        world.process();
     }
 }
