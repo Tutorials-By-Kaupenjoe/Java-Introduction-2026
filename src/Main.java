@@ -2,8 +2,20 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        /* JAVA BASIC SYNTAX */
+
+        /* Variables */
+
+        // datatype name_of_variable; // Declaration
+        // OR
+        // datatype name_of_variable = value_of_variable; // Initialization (Declaration + Assignment of Value)
+
+        int points;     // Declaration
+        points = 100;   // Assignment
+        int x = -69;    // Initialization (Declaration + Assignment)
+
+        // Every instruction/line ends with a semicolon ;
+        // This is like a period at the end of a sentence .
+        // int y = 42
     }
 }
