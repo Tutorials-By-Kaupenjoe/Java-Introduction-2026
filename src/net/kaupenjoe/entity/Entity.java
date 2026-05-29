@@ -6,37 +6,51 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Entity {
+public class Entity 
+{
     private final int id;
     private List<Component> components = new ArrayList<>();
 
-    public Entity(int id) {
+    public Entity(int id) 
+    {
         this.id = id;
     }
 
-    public void add(Component component) {
+    public void add(Component component) 
+    {
         this.components.add(component);
     }
 
-    public <T extends Component> void remove(Class<T> type) {
+    public <T extends Component> void remove(Class<T> type) 
+    {
         components.removeIf(type::isInstance);
     }
 
-    public <T extends Component> Optional<T> getOptionalComponent(Class<T> type) {
+    public <T extends Component> Optional<T> getOptionalComponent(Class<T> type) 
+    {
         return components.stream()
                 .filter(type::isInstance)
                 .map(type::cast)
                 .findFirst();
     }
 
-    public <T extends Component> T getComponent(Class<T> type) {
+    public <T extends Component> T getComponent(Class<T> type) 
+    {
         return components.stream()
                 .filter(type::isInstance)
                 .map(type::cast)
                 .findFirst().orElse(null);
     }
 
-    public int getId() {
+    public <T extends Component> boolean hasComponent(Class<T> type) 
+    {
+        return components.stream()
+                .anyMatch(type::isInstance);
+    }
+
+
+    public int getId() 
+    {
         return id;
     }
 }

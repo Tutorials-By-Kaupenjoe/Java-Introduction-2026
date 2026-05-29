@@ -45,5 +45,27 @@ public class Main {
         // world.edit(whiskersId).add(new BirthdayRequest()); // whiskers.birthday();
 
         world.process();
+
+        // --- START OF DIAGNOSTIC TEST FOR YOUR NEW METHOD ---
+        System.out.println("\n--- RUNNING DIAGNOSTIC CHECK ON VEDAL ---");
+        
+        // 1. Fetch the actual Entity object for Vedal from the world engine
+        net.kaupenjoe.entity.Entity vedalEntity = world.edit(vedalId);
+        
+        // 2. Execute your brand-new method to check for a shell component
+        if (vedalEntity.hasComponent(HasShellComponent.class)) {
+            System.out.println("SUCCESS: Vedal has a protective shell component attached!");
+        } else {
+            System.out.println("DEBUG: No shell component detected.");
+        }
+        
+        // 3. Let's verify a negative test (checking if Vedal has a BirthdayRequest component)
+        if (vedalEntity.hasComponent(BirthdayRequest.class)) {
+            System.out.println("DEBUG: Vedal has a pending birthday request.");
+        } else {
+            System.out.println("SUCCESS: Negative check passed. Vedal does not have a pending birthday request.");
+        }
+        System.out.println("-------------------------------------------\n");
+        // --- END OF DIAGNOSTIC TEST ---
     }
 }
